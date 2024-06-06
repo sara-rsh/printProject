@@ -10,7 +10,7 @@ export const ProductsProvider2 = ({ children }) => {
   const [products2, setProducts2] = useState([]);
 
   useEffect(() => {
-    fetch("https://api.escuelajs.co/api/v1/products")
+    fetch("http://localhost:5000/products")
       .then(response => response.json())
       .then(data => setProducts2(data))
       .catch(error => console.error(error));
