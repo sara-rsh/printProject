@@ -49,6 +49,22 @@ def login():
         return jsonify({"message": "Invalid phonenumber or password"}), 401
 
 
+@app.route("/products", methods=["GET"])
+def get_products():
+    
+    import pdb; pdb.set_trace()
+    cur.execute("SELECT * FROM products")
+    products = cur.fetchall()
+    product_data = []
+    for product in products:
+        product_dict = {
+            "stock": product[2],
+            "title": product[3],
+            "picture": product[4]
+        }
+        product_data.append(product_dict)
+    
+    return jsonify({"products": product_data})
 
 
 # cur.close()
