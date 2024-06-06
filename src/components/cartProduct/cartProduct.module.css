@@ -1,0 +1,30 @@
+.cartContent {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin: 1vw;
+}
+.cart {
+  display: flex;
+  gap: 2vw;
+  border: 1px solid #e4e2e6;
+  border-radius: 0.5vw;
+  padding: 1vw;
+  width: 70%;
+}
+.cart img {
+  width: 5vw;
+}
+.deleteBtn {
+  color: #2f5ed6;
+  border: none;
+  background-color: transparent;
+}
+.leftCart {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  gap: 5vw;
+  color: #2f5ed6;
+  font-size: 2vw;
+}

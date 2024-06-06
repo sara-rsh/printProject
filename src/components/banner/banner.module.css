@@ -1,0 +1,47 @@
+.banner {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 1vw;
+  padding: 0vw 10vw;
+}
+.changingBanner {
+  position: relative;
+}
+.changingBanner img {
+  border-radius: 0px 4vw;
+  height: 100%;
+  width: 100%;
+  object-fit: fill;
+}
+.nextBtn {
+  position: absolute;
+  top: 50%;
+  border: none;
+  right: 1vw;
+  color: #2f5ed68e;
+  font-size: 2vw;
+}
+.prevBtn {
+  position: absolute;
+  top: 50%;
+  border: none;
+  left: 1vw;
+  color: #2f5ed68e;
+  font-size: 2vw;
+}
+.prevBtn:hover,
+.nextBtn:hover {
+  color: #2f5ed6;
+}
+.news {
+  padding: 0px 1vw;
+  background-color: #eeedf4;
+  border-radius: 0px 4vw;
+  width: 30%;
+}
+.news h3 {
+  text-align: center;
+  border-bottom: 1px solid black;
+  margin: 1vw;
+  padding-bottom: 0.5vw;
+}

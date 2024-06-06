@@ -1,0 +1,67 @@
+.validationP {
+  color: brown;
+  position: absolute;
+  padding-right: 1rem;
+  top: 2rem;
+}
+.container {
+  padding: .5rem;
+  gap: 20px;
+  position: absolute;
+  right:.5rem;
+}
+.container h1 {
+  text-align: center;
+}
+.fields {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 22px;
+  flex: none;
+  order: 1;
+  align-self: stretch;
+  flex-grow: 0;
+}
+.fields div{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #757680;
+  padding: 12px 10px;
+  border-radius: 4px;
+  align-self: stretch;
+  position: relative;
+}
+.fields div:hover {
+  border: 3px solid #2f5ed6;
+  border-radius: 4px;
+}
+.fields div input{
+  border: none;
+}
+.fields div input:focus{
+  outline:none;
+}
+.hiddenBtn {
+  border: none;
+  background-color: transparent;
+}
+.loginBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 24px;
+  gap: 4px;
+
+  width: 350px;
+  height: 40px;
+
+  background: #e4e2e6;
+  border-radius: 8px;
+
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+}

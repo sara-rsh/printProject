@@ -1,0 +1,68 @@
+.topFooter {
+  background-color: #00297a;
+  color: #ffffff;
+  display: flex;
+  justify-content: space-around;
+  padding: 3vw;
+}
+.bottomFooter {
+  background-color: #2f5ed6;
+}
+.mailBox button {
+  background-color: #2f5ed6;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+.mailBox input {
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  background-color: transparent;
+  padding: 5px 10px 5px 10vw;
+}
+.mailBox input::placeholder {
+  color: #ffffff;
+}
+.mailBox {
+  display: flex;
+  gap: 10px;
+}
+.bottomFooter {
+  color: #ffffff;
+  display: flex;
+  padding:3vw 5vw 6vw 5vw;
+  justify-content: space-around;
+}
+.bottomFooterSec{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items:flex-start;
+}
+.bottomFooterSec h4 {
+  border-bottom: 1px solid #ffffff;
+  padding-bottom: 5px;
+}
+.bottomFooter div a{
+  text-decoration: none;
+  color:#ffffff ;
+}
+.licensePart{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+}
+.licensePart div span{
+  padding-left:2vw;
+}
+.licensePart img{
+  width: 17vw;
+}
+.icons{
+  display: flex;
+  gap: 2vw;
+  justify-content: center;
+  font-size: 1.5vw;
+}

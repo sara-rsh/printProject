@@ -1,0 +1,54 @@
+.topPrf {
+  padding: 0.5vw 8vw 0.5vw 0vw;
+  font-weight: bolder;
+  font-size: 1.5vw;
+  border-top: 1vw solid #00297a;
+  margin: 1vw 0vw;
+  text-align: center;
+}
+.prf {
+  display: flex;
+  justify-content: center;
+  gap: 1vw;
+  margin-bottom: 1.5vw;
+  padding-bottom: 2vw;
+  border-bottom: 1vw solid #00297a;
+}
+.prfCard {
+  border: 1px solid #e4e2e6;
+  border-radius: 8px;
+  width: 15vw;
+}
+.prfCardTop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding-bottom: 2px;
+}
+.prfCardMiddle {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding-bottom: 3px;
+}
+.prfCardTop img {
+  width: 7vw;
+}
+.prfCard div {
+  border-bottom: 1px solid #e4e2e6;
+  margin: 0.5rem;
+}
+.prfCardP:not(:last-child) {
+  border-bottom: 1px solid #e4e2e6;
+  padding-bottom: 3px;
+}
+.prfCardP:not(:last-child):hover {
+  border-bottom: 2px solid #2f5ed6;
+}
+.prfCardP {
+  margin: 0.5rem;
+}
+.prfCardP:hover {
+  color: #2f5ed6;
+}

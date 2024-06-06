@@ -1,0 +1,30 @@
+.paginationBtn{
+  padding: 0.5vw 1vw;
+  background-color: #2f5ed6;
+  border-radius: 100%;
+  font-size: 1vw;
+  color: #ffff;
+  border: none;
+}
+.pagination div button:hover{
+    color: #070707;
+    background-color: #e4e2e6;
+}
+.pagination div {
+  border-radius: 5vw;
+  border: 1px solid #e4e2e6;
+  padding: 1vw;
+  display: flex;
+  gap: 1vw;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2vw;
+}
+.active{
+    padding: 0.5vw 1vw;
+    background: #e4e2e6;
+    color: #070707;
+    border-radius: 100%;
+    font-size: 1vw;
+    border: none;
+}

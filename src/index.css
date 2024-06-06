@@ -1,0 +1,8 @@
+@font-face {
+    font-family:IranYekan ;
+    src: url(./assets//font/IRANYekanRegular.ttf);
+}
+p,h1,h2,h3,h4,h5,h6,div,input,li,ul,a,button{
+    font-size: clamp(.6vw , .9vw , 1.5vw);
+    font-family:IranYekan ;
+}

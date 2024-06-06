@@ -1,0 +1,41 @@
+.navbar {
+    display:flex;
+    padding-right: 8vw;
+    margin-bottom: 1vw;
+    gap: 2vw;
+    list-style: none;
+}
+.navItems{
+    text-decoration: none;
+    color: #2F5ED6;
+}
+.navItems:hover{
+    border-radius: .5vw;
+    background-color: #2F5ED6;
+    color: #ffffff;
+    padding: .5vw;
+}
+.navIcons{
+    font-size: 1vw;
+    color: #2F5ED6;
+    padding-left: .5vw;
+}
+.navbar li{
+    display: flex;
+    align-items: center;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+.reqError{
+    animation: fadeOut 4s forwards;
+    padding-right: 5vw;
+    color: rgb(169, 3, 3);
+}

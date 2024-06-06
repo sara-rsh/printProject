@@ -1,0 +1,52 @@
+.header {
+  display: flex;
+  justify-content: space-around;
+  padding:1vw 0vw;
+  border-bottom: 1px solid #D6D6D6;
+}
+.headMenu {
+  display: flex;
+  gap: 10px;
+  flex-direction: row-reverse;
+  list-style: none;
+  margin: 0px;
+  align-items: center;
+}
+.headMenu li:hover{
+  color: #ffffff;
+  background-color: #2F5ED6;
+  border-radius: 5px;
+  padding: .5vw;
+}
+.searchBox {
+  position: relative;
+}
+.searchBox input {
+  padding:.5vw 1vw .5vw 10vw;
+  border: 1px solid #d6d6d6;
+  border-radius: 16px;
+}
+.searchBox input::placeholder{
+  color: #2F5ED6; 
+}
+.searchBox span {
+  position: absolute;
+  left: .5vw;
+  top: .3vw;
+  font-size: 1.5vw;
+}
+.prfItem {
+  position: relative;
+}
+.counter {
+  color: brown;
+}
+.logo{
+  width: 13vw;
+}
+.headBtn{
+  font-size: 1.3vw;
+}
+.prfDisplay{
+  display: none;
+}

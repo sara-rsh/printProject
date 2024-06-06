@@ -1,0 +1,31 @@
+.profile {
+  background-color: #2f5ed6;
+  position: absolute;
+  top: 7vw;
+  left: 6vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #ffff;
+  border-radius:0vw 0vw 1vw 1vw ;
+}
+.profile div {
+  border-bottom: 2px solid #d6d6d693;
+  padding: 0vw 1vw;
+}
+.infoLink {
+  padding: 1vw 1vw;
+  color: #ffff;
+  text-decoration: none;
+  background-color: #00297A;
+  border-radius:0vw 0vw 1vw 1vw ;
+}
+.infoLink:hover {
+    background-color: #2f5ed6;
+  border-radius:0vw 0vw 1vw 1vw ;
+  color: #d6d6d6;
+}
+.infoLinkIcon{
+    font-size: 1.2vw;
+    padding-left: .5vw;
+}

@@ -1,0 +1,18 @@
+body{
+    direction: rtl;
+    margin: 0px;
+}
+.stickyBtn {
+    position: fixed;
+    right: 1vw;
+    bottom: 0vw;
+    color: #25D366;
+    font-size:5vw;
+}
+.discount{
+    background-color:#2F5ED6;
+    color: #ffffff;
+    padding: .5vw;
+    text-align: center;
+    cursor: pointer;
+}
