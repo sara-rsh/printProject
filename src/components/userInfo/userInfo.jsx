@@ -4,13 +4,20 @@ import React, { useState } from "react";
 function UserInfo() {
   const [isShowen, setIsShown] = useState(true);
 
+  const handleUserInfoSubmit = () => {
+    alert("سفارش شما ثبت شداطلاعات مربوطه برایتان ایمیل خواهد شد");
+  };
+  const handleUserReq = () => {
+    alert("درخواست شما ثبت شداطلاعات مربوطه برایتان ایمیل خواهد شد");
+  };
+
   return (
     <div className={styles.info}>
       <h1>اطلاعات حساب کاربری</h1>
       <span onClick={() => setIsShown(true)}>اطلاعات کاربری</span>
       <span onClick={() => setIsShown(false)}> درخواست ها</span>
       {isShowen ? (
-        <form className={styles.infoFields}>
+        <form className={styles.infoFields} onSubmit={handleUserInfoSubmit}>
           <div>
             <label>نام کاربری</label>
             <input type="text" />
@@ -40,7 +47,11 @@ function UserInfo() {
           </button>
         </form>
       ) : (
-        <form className={styles.infoFields} style={{display:'block'}}>
+        <form
+          className={styles.infoFields}
+          style={{ display: "block" }}
+          onSubmit={handleUserReq}
+        >
           <div>
             <label>عنوان درخواست</label>
             <input type="text" />

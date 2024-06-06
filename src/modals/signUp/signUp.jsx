@@ -53,6 +53,7 @@ function SignUp() {
       .catch((error) => {
         console.error("Error: ", error);
       });
+      console.log(isLogedIn)
   };
 
   const [isHidden, setIsHidden] = useState(false);
