@@ -38,20 +38,17 @@ function SignUp() {
   const { isLogedIn, setIsLogedIn } = useContext(FlagContext);
 
   const onFormSubmit = (data) => {
-    fetch("http://localhost:5000/signUp", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+    fetch('http://localhost:5000/signUp', {
+      method: 'POST',
       body: JSON.stringify(data),
     })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("Server response: ", data);
+      .then(response => response.json())
+      .then(data => {
+        console.log('Server response: ', data);
         setIsLogedIn(true);
       })
-      .catch((error) => {
-        console.error("Error: ", error);
+      .catch(error => {
+        console.error('Error: ', error);
       });
       console.log(isLogedIn)
   };
