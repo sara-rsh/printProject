@@ -33,10 +33,19 @@ function Login({ closeModal, phoneNumber, password }) {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onFormSubmit = (data) => {
-    console.log(data);
-    setIsLogedIn(true);
-    console.log(isLogedIn);
-    // document.getElementById('login').style.display='none'
+    fetch('http://localhost:5000/login', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Server response: ', data);
+        setIsLogedIn(true);
+      })
+      .catch(error => {
+        console.error('Error: ', error);
+      });
+      console.log(isLogedIn)
   };
 
   return (
