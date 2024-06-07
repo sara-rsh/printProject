@@ -7,35 +7,35 @@ import { FaRegHeart } from "react-icons/fa6";
 function ProductItem2({ products2 }) {
   const cart = useContext(CartContext);
 
-  // console.log(products2);
+  console.log(products2);
   // const products2 = useProducts2();
 
   return (
     <div className={styles.productItem}>
       {products2.map((product) => (
-        <div key={product.id} className={styles.item}>
-          <img src={product.images} alt={product.title} />
+        <div className={styles.item}>
+          <img src={product[4]} alt={product[3]} />
           <div>
-            <h3>{product.title}</h3>
+            <h3>{product[3]}</h3>
             <FaRegHeart className={styles.heartIcon} />
           </div>
-          <p id={product.id}>{product.price}</p>
-          {cart.getProductQuantity(product.id) > 0 ? (
+          <p id={product[0]}>{product[2]}</p>
+          {cart.getProductQuantity(product[0]) > 0 ? (
             <>
               <div className={styles.BasketCounter}>
-                <p>تعداد:{cart.getProductQuantity(product.id)}</p>
+                <p>تعداد:{cart.getProductQuantity(product[0])}</p>
                 <div>
-                  <button onClick={() => cart.addItemToCart(product.id)}>
+                  <button onClick={() => cart.addItemToCart(product[0])}>
                     +
                   </button>
-                  <button onClick={() => cart.removeItemToCart(product.id)}>
+                  <button onClick={() => cart.removeItemToCart(product[0])}>
                     -
                   </button>
                 </div>
               </div>
               <button
                 className={styles.basketBtn}
-                onClick={() => cart.deleteFromCart(product.id)}
+                onClick={() => cart.deleteFromCart(product[0])}
               >
                 حذف از سبد خرید
               </button>
@@ -43,7 +43,7 @@ function ProductItem2({ products2 }) {
           ) : (
             <button
               className={styles.basketBtn}
-              onClick={() => cart.addItemToCart(product.id)}
+              onClick={() => cart.addItemToCart(product[0])}
             >
               افزودن به سبد خرید
             </button>

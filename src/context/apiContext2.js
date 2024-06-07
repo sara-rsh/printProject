@@ -9,7 +9,7 @@ export const useProducts2 = () => {
 export const ProductsProvider2 = ({ children }) => {
   const [products2, setProducts2] = useState([]);
 
-  useEffect(() => {
+  // useEffect(() => {
 
     // const fetchData = async () => {
     //   const result = await fetch("http://localhost:5000/products");
@@ -18,20 +18,27 @@ export const ProductsProvider2 = ({ children }) => {
     //   setProducts2(jsonResult);
     // };
     // fetchData();
-    const fetchData = async () => {
-      try {
-        const result = await fetch("http://localhost:3000/products2");
-        if (!result.ok) {
-          throw new Error('Failed to fetch data');
-        }
-        const jsonResult = await result.json();
-        setProducts2(jsonResult);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
-    fetchData()
+  //   const fetchData = async () => {
+  //     try {
+  //       const result = await fetch("http://localhost:3000/products2");
+  //       if (!result.ok) {
+  //         throw new Error('Failed to fetch data');
+  //       }
+  //       const jsonResult = await result.json();
+  //       setProducts2(jsonResult);
+  //     } catch (error) {
+  //       console.error('Error fetching data:', error);
+  //     }
+  //   };
+  //   fetchData()
 
+  // }, []);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/products')
+      .then(response => response.json())
+      .then(data =>{console.log(data);setProducts2(data)} )
+      .catch(error => console.error(error));
   }, []);
 
   return (
