@@ -5,9 +5,10 @@ import { useContext, useState } from "react";
 import { CartContext } from "../../context/cartContext.js";
 import { FlagContext } from "../../context/flagContext.js";
 import CartProduct from "../../components/cartProduct/cartProduct.jsx";
-import Logo from "../../assets/logo.jpg";
 import EmptyBasket from "../../assets/Illustration.jpg";
 import { Link } from "react-router-dom";
+import Logo from "../../assets/logoo.jpeg";
+
 
 function Basket({ closeModal, productCount }) {
   const cart = useContext(CartContext);

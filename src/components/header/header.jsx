@@ -12,7 +12,7 @@ import { useState, useContext } from "react";
 import { CartContext } from "../../context/cartContext";
 import { FlagContext } from "../../context/flagContext";
 
-import Logo from "../../assets/logo.jpg";
+import Logo from "../../assets/logoo.jpeg";
 
 function Header() {
   const [openProfile, setOpenProfile] = useState(false);
