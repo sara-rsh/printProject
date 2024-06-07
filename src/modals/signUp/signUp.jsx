@@ -38,88 +38,95 @@ function SignUp() {
   const { isLogedIn, setIsLogedIn } = useContext(FlagContext);
 
   const onFormSubmit = (data) => {
-    fetch('http://localhost:5000/signUp', {
-      method: 'POST',
+    fetch("http://localhost:5000/signUp", {
+      method: "POST",
       body: JSON.stringify(data),
     })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Server response: ', data);
-        setIsLogedIn(true);
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Server response: ", data);
       })
-      .catch(error => {
-        console.error('Error: ', error);
+      .catch((error) => {
+        console.error("Error: ", error);
       });
-      console.log(isLogedIn)
+    setIsLogedIn(true);
   };
 
   const [isHidden, setIsHidden] = useState(false);
 
   return (
-    <form
-      noValidate
-      onSubmit={handleSubmit(onFormSubmit)}
-      className={styles.FieldsContainer}
-    >
-      <h1>ایجاد حساب کاربری</h1>
-      <div className={styles.fields} style={{ gap: "1vw" }}>
-        <div className={styles.topFields}>
-          <div>
-            <input
-              type="text"
-              {...register("phoneNumber")}
-              placeholder="شماره موبایل"
-            />
-            {errors.phoneNumber && (
-              <p className={styles.validationP}>
-                {errors.phoneNumber?.message}
-              </p>
-            )}
+    <>
+      {!isLogedIn && (
+        <form
+          noValidate
+          onSubmit={handleSubmit(onFormSubmit)}
+          className={styles.FieldsContainer}
+        >
+          <h1>ایجاد حساب کاربری</h1>
+          <div className={styles.fields} style={{ gap: "1vw" }}>
+            <div className={styles.topFields}>
+              <div>
+                <input
+                  type="text"
+                  {...register("phoneNumber")}
+                  placeholder="شماره موبایل"
+                />
+                {errors.phoneNumber && (
+                  <p className={styles.validationP}>
+                    {errors.phoneNumber?.message}
+                  </p>
+                )}
+              </div>
+              <div>
+                <input
+                  type="text"
+                  {...register("username")}
+                  placeholder="نام کاربری"
+                />
+                {errors.username && (
+                  <p className={styles.validationP}>
+                    {errors.username?.message}
+                  </p>
+                )}
+              </div>
+              <div className={styles.password}>
+                <input
+                  type={!isHidden ? "password" : "text"}
+                  {...register("password")}
+                  placeholder="گذرواژه"
+                />
+                <button
+                  className={styles.hiddenBtn}
+                  onClick={() => setIsHidden((prev) => !prev)}
+                >
+                  {isHidden ? <LuEye /> : <LuEyeOff />}
+                </button>
+                {errors.password && (
+                  <p className={styles.validationP}>
+                    {errors.password?.message}
+                  </p>
+                )}
+              </div>
+              <div>
+                <input
+                  type="password"
+                  {...register("confirmPassword")}
+                  placeholder="تکرار گذرواژه"
+                />
+                {errors.confirmPassword && (
+                  <p className={styles.validationP}>
+                    {errors.confirmPassword?.message}
+                  </p>
+                )}
+              </div>
+            </div>
+            <div className={styles.logBtns}>
+              <button type="submit">ثبت نام</button>
+            </div>
           </div>
-          <div>
-            <input
-              type="text"
-              {...register("username")}
-              placeholder="نام کاربری"
-            />
-            {errors.username && (
-              <p className={styles.validationP}>{errors.username?.message}</p>
-            )}
-          </div>
-          <div className={styles.password}>
-            <input
-              type={!isHidden ? "password" : "text"}
-              {...register("password")}
-              placeholder="گذرواژه"
-            />
-            <button
-              className={styles.hiddenBtn}
-              onClick={() => setIsHidden((prev) => !prev)}
-            >
-              {isHidden ? <LuEye /> : <LuEyeOff />}
-            </button>
-            {errors.password && (
-              <p className={styles.validationP}>{errors.password?.message}</p>
-            )}
-          </div>
-          <div>
-            <input
-              type="password"
-              {...register("confirmPassword")}
-              placeholder="تکرار گذرواژه"
-            />
-            {errors.confirmPassword && (
-              <p className={styles.validationP}>
-                {errors.confirmPassword?.message}
-              </p>
-            )}
-          </div>
-        </div>
-        <div className={styles.logBtns}>
-          <button type="submit">ثبت نام</button>
-        </div>
-      </div>
-    </form>
+        </form>
+      )}
+    </>
   );
 }
 

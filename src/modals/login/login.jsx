@@ -1,6 +1,6 @@
 import styles from "./login.module.css";
 import BackDrop from "../BackDrop/backDrop";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -9,7 +9,6 @@ import SignUp from "../signUp/signUp";
 import { FlagContext } from "../../context/flagContext.js";
 import image from "../../assets/Frame 11.jpg";
 import Logo from "../../assets/logoo.jpeg";
-
 
 function Login({ closeModal, phoneNumber, password }) {
   const [isFirstModalOpen, setIsFirstModalOpen] = useState(false);
@@ -42,11 +41,11 @@ function Login({ closeModal, phoneNumber, password }) {
       .then(response => response.json())
       .then(data => {
         console.log('Server response: ', data);
-        setIsLogedIn(true);
       })
       .catch(error => {
         console.error('Error: ', error);
       });
+      setIsLogedIn(true);
   };
   // const onFormSubmit = (data) => {
   //   fetch('http://localhost:5000/login', {
