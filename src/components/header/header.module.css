@@ -1,8 +1,7 @@
 .header {
   display: flex;
   justify-content: space-around;
-  align-items: center;
-  /* padding:1vw 0vw; */
+  padding:1vw 0vw;
   border-bottom: 1px solid #D6D6D6;
 }
 .headMenu {
@@ -43,7 +42,7 @@
   color: brown;
 }
 .logo{
-  width: 7vw;
+  width: 13vw;
 }
 .headBtn{
   font-size: 1.3vw;

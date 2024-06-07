@@ -19,11 +19,12 @@
   z-index: 0;
 }
 .headContainer {
+  padding: 1vw;
   display: flex;
   justify-content: space-between;
 }
 .headContainer button {
-  font-size: 1.5vw;
+  font-size: 1vw;
   border: none;
   background-color: transparent;
 }
@@ -95,7 +96,4 @@
     color: brown;
     padding-right: 1.5vw;
     margin: 0px;
-  }
-  .logo{
-    width: 5vw;
   }

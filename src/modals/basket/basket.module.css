@@ -25,6 +25,8 @@
 }
 .topBasket img {
   width: 5vw;
+  height: 2vw;
+  padding: 1vw;
 }
 .topBasket h1 {
   font-size: 1vw;

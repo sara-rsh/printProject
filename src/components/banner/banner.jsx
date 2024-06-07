@@ -9,15 +9,12 @@ import styles from "./banner.module.css";
 
 // import backgroundImage1 from '../../assets/api.naghshealmas.png';
 // import backgroundImage2 from '../../assets/print24-Keyvisual_mobile_030622_FF_m8jkhs.webp';
-import backgroundImage1 from "../../assets/bg1.jpeg";
-import backgroundImage2 from "../../assets/bg2.jpeg";
-import backgroundImage3 from "../../assets/bg3.jpeg";
-import backgroundImage7 from "../../assets/bg7.jpeg";
-import backgroundImage6 from "../../assets/bg6.jpeg";
+import backgroundImage3 from "../../assets/Klimaneutral_drucken_Websitebanner_lyqad3.webp";
+import backgroundImage4 from "../../assets/individualisierbare-produktausfuehrungen-websitebanner_zpifcf.webp";
 // import { SlSizeActual, SlSizeFullscreen } from 'react-icons/sl';
 
 function Banner() {
-  const backgrounds = [backgroundImage1, backgroundImage2 , backgroundImage3 , backgroundImage7 ,backgroundImage6];
+  const backgrounds = [backgroundImage3, backgroundImage4];
 
   const [currentBackgroundIndex, setCurrentBackgroundIndex] = useState(0);
 
