@@ -10,6 +10,7 @@ import { useProducts2 } from "../../context/apiContext2";
 import { useProducts } from "../../context/apiContext.js";
 
 function Products() {
+
   const [visibility, setVisibility] = useState(false);
 
   const products = useProducts();
@@ -19,7 +20,7 @@ function Products() {
   const [currentPage2, setCurrentPage2] = useState(1);
 
   const postsPerPage = 6;
-  const postsPerPage2 = 6
+  const postsPerPage2 = 6;
 
   const lastPostIndex = currentPage + postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
@@ -37,7 +38,7 @@ function Products() {
             <p>1دسته بندی</p>
             <IoIosArrowBack />
           </li>
-          <li>
+          <li onClick={() => setVisibility(false)}>
             <p>2دسته بندی</p>
             <IoIosArrowBack />
           </li>
@@ -61,12 +62,7 @@ function Products() {
       </div>
       <div className={styles.itemsPart}>
         <div className={styles.topCategory}>
-          <span
-            onClick={() => setVisibility(false)}
-            className={styles.topViews}
-          >
-            پربازدیدترین
-          </span>
+          <span className={styles.topViews}>پربازدیدترین</span>
           <span>جدید ترین</span>
           <span>پرفروش ترین</span>
           <span>ارزان ترین</span>

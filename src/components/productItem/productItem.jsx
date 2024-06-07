@@ -7,6 +7,7 @@ import { FaRegHeart } from "react-icons/fa6";
 
 function ProductItem({products}) {
   const cart = useContext(CartContext);
+  console.log(products)
   // const products = useProducts();
 
   return (
