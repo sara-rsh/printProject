@@ -18,7 +18,7 @@ function Navbar() {
       setTimeout(function () {
         document.getElementById("reqError").style.display = "none";
       }, 5000);
-      document.getElementById("reqError").style.display = "block"
+      document.getElementById("reqError").style.display = "block";
     }
   }
 
@@ -26,36 +26,42 @@ function Navbar() {
     <div>
       <ul className={styles.navbar}>
         <li>
-          <AiFillHome className={styles.navIcons} />
-          <Link to="/" className={styles.navItems}>
-            صفحه اصلی
-          </Link>
+          <button>
+            <AiFillHome className={styles.navIcons} />
+            <Link to="/" className={styles.navItems}>
+              صفحه اصلی
+            </Link>
+          </button>
         </li>
         <li>
-          <PiBasketFill className={styles.navIcons} />
-          <Link to="/products" className={styles.navItems}>
-            محصولات آماده{" "}
-          </Link>
+          <button>
+            <PiBasketFill className={styles.navIcons} />
+            <Link to="/products" className={styles.navItems}>
+              محصولات آماده{" "}
+            </Link>
+          </button>
         </li>
         <li onClick={handleReqError}>
-          <BsChatSquareQuoteFill className={styles.navIcons} />
-          <Link
-            onClick={
-              !isLogedIn
-                ? () => setReqError(true)
-                : () => setReqError(setReqError)
-            }
-            to={isLogedIn && "/information"}
-            className={styles.navItems}
-          >
-            درخواست تعمیر
-          </Link>
-          {isReqError && (
-            <p id="reqError" className={styles.reqError}>
-              <RiErrorWarningLine style={{paddingLeft:'.5vw'}}/>
-              برای ثبت درخواست باید ابتدا وارد سایت شوید
-            </p>
-          )}
+          <button>
+            <BsChatSquareQuoteFill className={styles.navIcons} />
+            <Link
+              onClick={
+                !isLogedIn
+                  ? () => setReqError(true)
+                  : () => setReqError(setReqError)
+              }
+              to={isLogedIn && "/information"}
+              className={styles.navItems}
+            >
+              درخواست تعمیر
+            </Link>
+            {isReqError && (
+              <p id="reqError" className={styles.reqError}>
+                <RiErrorWarningLine style={{ paddingLeft: ".5vw" }} />
+                برای ثبت درخواست باید ابتدا وارد سایت شوید
+              </p>
+            )}
+          </button>
         </li>
       </ul>
     </div>

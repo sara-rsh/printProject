@@ -2,38 +2,42 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  /* padding:1vw 0vw; */
-  border-bottom: 1px solid #D6D6D6;
+  border-bottom: 1px solid #d6d6d6;
 }
 .headMenu {
   display: flex;
-  gap: 10px;
+  gap: .5vw;
   flex-direction: row-reverse;
   list-style: none;
   margin: 0px;
   align-items: center;
 }
-.headMenu li:hover{
+.headMenu li button:hover {
   color: #ffffff;
-  background-color: #2F5ED6;
-  border-radius: 5px;
+  background-color: #2f5ed6;
+  border-radius: .5vw;
+
+}
+.headMenu li button {
+  background-color: transparent;
+  border: none;
   padding: .5vw;
 }
 .searchBox {
   position: relative;
 }
 .searchBox input {
-  padding:.5vw 1vw .5vw 10vw;
+  padding: 0.5vw 1vw 0.5vw 10vw;
   border: 1px solid #d6d6d6;
   border-radius: 16px;
 }
-.searchBox input::placeholder{
-  color: #2F5ED6; 
+.searchBox input::placeholder {
+  color: #2f5ed6;
 }
 .searchBox span {
   position: absolute;
-  left: .5vw;
-  top: .3vw;
+  left: 0.5vw;
+  top: 0.3vw;
   font-size: 1.5vw;
 }
 .prfItem {
@@ -42,12 +46,12 @@
 .counter {
   color: brown;
 }
-.logo{
+.logo {
   width: 7vw;
 }
-.headBtn{
+.headBtn {
   font-size: 1.3vw;
 }
-.prfDisplay{
+.prfDisplay {
   display: none;
 }

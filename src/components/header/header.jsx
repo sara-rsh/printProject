@@ -55,8 +55,10 @@ function Header() {
             setOpenBasket(true);
           }}
         >
-          <SlBasket className={styles.headBtn} />
-          سبد خرید
+          <button>
+            <SlBasket className={styles.headBtn} />
+            سبد خرید
+          </button>
         </li>
         <p className={styles.counter}>{productCount}</p>
         <div>
@@ -70,8 +72,10 @@ function Header() {
               setOpenLogin(true);
             }}
           >
-            <MdLogin className={styles.headBtn} />
-            ورود/ثبت نام
+            <button>
+              <MdLogin className={styles.headBtn} />
+              ورود/ثبت نام
+            </button>
           </li>
         )}
         <div>{openLogin && <Login closeModal={setOpenLogin} />}</div>
