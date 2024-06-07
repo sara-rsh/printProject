@@ -1,6 +1,6 @@
 import styles from "./login.module.css";
 import BackDrop from "../BackDrop/backDrop";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -8,6 +8,8 @@ import { LuEye, LuEyeOff } from "react-icons/lu";
 import SignUp from "../signUp/signUp";
 import { FlagContext } from "../../context/flagContext.js";
 import image from "../../assets/Frame 11.jpg";
+import Logo from "../../assets/logoo.jpeg";
+
 
 function Login({ closeModal, phoneNumber, password }) {
   const [isFirstModalOpen, setIsFirstModalOpen] = useState(false);
@@ -45,8 +47,23 @@ function Login({ closeModal, phoneNumber, password }) {
       .catch(error => {
         console.error('Error: ', error);
       });
-      console.log(isLogedIn)
   };
+  // const onFormSubmit = (data) => {
+  //   fetch('http://localhost:5000/login', {
+  //     method: 'POST',
+  //     body: JSON.stringify(data),
+  //   })
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       const loggedInStatus = data.isLoggedIn; // فرضا اطلاعات مورد نیاز از سمت سرور
+  //       console.log('Server response: ', data);
+  //       setIsLogedIn(loggedInStatus);
+  //     })
+  //     .catch(error => {
+  //       console.error('Error: ', error);
+  //     });
+  // };
+  
 
   return (
     <>
@@ -64,7 +81,7 @@ function Login({ closeModal, phoneNumber, password }) {
                 >
                   x
                 </button>
-                <img src="/" alt="logoImage" />
+                <img src={Logo} className={styles.logo} alt="logoImage" />
               </div>
               {isFirstModalOpen ? (
                 <SignUp />

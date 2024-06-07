@@ -1,0 +1,60 @@
+.container {
+  padding: 1vw 13vw;
+}
+.topHot {
+  display: flex;
+  align-items: center;
+  gap: 0.5vw;
+}
+.hotIcon {
+  font-size: 2vw;
+}
+.hotPart {
+  display: grid;
+  direction: ltr;
+  grid-template-areas:
+    "p1 p4 p3 p3"
+    "p2 p5 p3 p3";
+}
+.hotPart div img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  border-radius: 1vw;
+}
+.hotPart div {
+  margin: 0.5vw;
+  position: relative;
+}
+/* .shadow{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 20vw;
+    left: 0vw;
+    z-index:1;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 65.07%, rgba(0, 0, 0, 0.72912) 84.63%, rgba(0, 0, 0, 0.8) 100%);
+    border-radius: 1vw;
+} */
+.hotPart div:nth-child(1) {
+  grid-area: p1;
+}
+.hotPart div:nth-child(2) {
+  grid-area: p2;
+}
+.hotPart div:nth-child(3) {
+  grid-area: p3;
+}
+.hotPart div:nth-child(4) {
+  grid-area: p4;
+}
+.hotPart div:nth-child(5) {
+  grid-area: p5;
+}
+.hotPart div h3 {
+  position: absolute;
+  bottom: 0.5vw;
+  left: 0.5vw;
+  color: #ffff;
+  z-index: 1;
+}
