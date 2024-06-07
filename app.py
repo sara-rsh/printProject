@@ -1,8 +1,10 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import psycopg2
 import json
 
 app = Flask(__name__)
+CORS(app)
 
 conn = psycopg2.connect(
     host="localhost",
@@ -50,21 +52,47 @@ def login():
 
 
 @app.route("/products", methods=["GET"])
-def get_products():
+def get_products1():
     
-    import pdb; pdb.set_trace()
-    cur.execute("SELECT * FROM products")
+    cur.execute("SELECT * FROM products WHERE product_category = 'HP_MODEL'")
     products = cur.fetchall()
-    product_data = []
-    for product in products:
-        product_dict = {
-            "stock": product[2],
-            "title": product[3],
-            "picture": product[4]
-        }
-        product_data.append(product_dict)
+    # product_data = []
+    # for product in products:
+    #     product_dict = {
+            
+    #         "stock": product[2],
+    #         "title": product[3],
+    #         "picture": product[4]
+    #     }
+    #     product_data.append(product_dict)
+    print(products)
+    return jsonify({"products": products})
+
+@app.route("/products2", methods=["GET"])
+def get_products2():
     
-    return jsonify({"products": product_data})
+    cur.execute("SELECT * FROM products WHERE product_category = 'CANON_MODEL'")
+    products = cur.fetchall()
+    #product_data = []
+  #  for product in products:
+      #  product_dict = {
+          #  "stock": product[2],
+           # "title": product[3],
+           # "picture": product[4]
+    
+      #  product_data.append(product_dict)
+    
+    return jsonify({"products": products})
+
+@app.route("/products3", methods=["GET"])
+def get_products3():
+    
+    cur.execute("SELECT * FROM products WHERE product_category = 'EPSON_MODEL'")
+    products = cur.fetchall()
+   
+    return jsonify({"products": products})
+
+
 
 
 # cur.close()

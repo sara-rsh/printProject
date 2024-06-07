@@ -10,7 +10,7 @@ export const ProductsProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch('https://fakestoreapi.com/products')
+    fetch('http://localhost:5000/products')
       .then(response => response.json())
       .then(data => setProducts(data))
       .catch(error => console.error(error));
