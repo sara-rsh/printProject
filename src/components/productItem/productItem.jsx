@@ -1,21 +1,15 @@
 import styles from "./productItem.module.css";
 import { useContext } from "react";
 import { CartContext } from "../../context/cartContext";
-// import { useProducts } from "../../context/apiContext.js";
 import { FaRegHeart } from "react-icons/fa6";
-// import Ax from '../../assets/3-5.jpg'
-import AA from '../../static/1-1.jpg'
 
 function ProductItem({products}) {
   const cart = useContext(CartContext);
-  // console.log(products)
-  // const products = useProducts();
 
   return (
     <div className={styles.productItem}>
       {products.map((product) => (
         <div key={product[0]} className={styles.item}>
-          {/* <img src={Ax} alt={product.title} /> */}
           <img src={product[4]} alt={product[3]} />
           <div>
             <h3>{product[3]}</h3>

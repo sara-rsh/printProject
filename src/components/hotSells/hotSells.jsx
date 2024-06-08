@@ -1,11 +1,11 @@
 import React from "react";
 import styles from "./hotSells.module.css";
 import { CiDiscount1 } from "react-icons/ci";
-import H1 from "../../assets/h1.jpeg";
-import H2 from "../../assets/h2.jpeg";
-import H3 from "../../assets/h3.jpeg";
-import H4 from "../../assets/h4.jpeg";
-import H5 from "../../assets/h5.jpeg";
+import H1 from "../../assets/s1.jpeg";
+import H2 from "../../assets/s2.jpeg";
+import H3 from "../../assets/s3.jpeg";
+import H4 from "../../assets/s4.jpeg";
+import H5 from "../../assets/s5.jpeg";
 
 export default function HotSells() {
   return (

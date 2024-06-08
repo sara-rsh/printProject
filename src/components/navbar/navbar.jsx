@@ -16,12 +16,18 @@ function Navbar() {
   function handleReqError() {
     if (!isLogedIn) {
       setTimeout(function () {
-        document.getElementById("reqError").style.display = "none";
+        const reqErrorElement = document.getElementById("reqError");
+        if (reqErrorElement) {
+          reqErrorElement.style.display = "none";
+        }
       }, 5000);
-      document.getElementById("reqError").style.display = "block";
+      const reqErrorElement = document.getElementById("reqError");
+      if (reqErrorElement) {
+        reqErrorElement.style.display = "block";
+      }
     }
   }
-
+  
   return (
     <div>
       <ul className={styles.navbar}>
@@ -55,13 +61,13 @@ function Navbar() {
             >
               درخواست تعمیر
             </Link>
-            {isReqError && (
+          </button>
+          {isReqError && (
               <p id="reqError" className={styles.reqError}>
                 <RiErrorWarningLine style={{ paddingLeft: ".5vw" }} />
                 برای ثبت درخواست باید ابتدا وارد سایت شوید
               </p>
             )}
-          </button>
         </li>
       </ul>
     </div>

@@ -12,11 +12,10 @@
   margin: 0px;
   align-items: center;
 }
-.headMenu li button:hover {
+.headMenu li button:hover , .prfItem:hover {
   color: #ffffff;
-  background-color: #2f5ed6;
+  background-color: #4b75de;
   border-radius: .5vw;
-
 }
 .headMenu li button {
   background-color: transparent;
@@ -42,15 +41,13 @@
 }
 .prfItem {
   position: relative;
+  padding: .5vw;
 }
 .counter {
   color: brown;
 }
 .logo {
   width: 7vw;
-}
-.headBtn {
-  font-size: 1.3vw;
 }
 .prfDisplay {
   display: none;
