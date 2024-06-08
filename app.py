@@ -1,10 +1,12 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, session
 from flask_cors import CORS
 import psycopg2
 import json
 
 app = Flask(__name__)
 CORS(app)
+app.secret_key = 'djaflsfjljehrw7343682yg'
+
 
 conn = psycopg2.connect(
     host="localhost",
@@ -19,19 +21,31 @@ cur = conn.cursor()
 def signUp_user():
     
     # import pdb; pdb.set_trace()
-    data = json.loads(request.data)
-    username = data["username"]
-    password = data["password"]
-    phonenumber =data["phoneNumber"]
+    try:
+        data = json.loads(request.data)
+        username = data["username"]
+        password = data["password"]
+        phonenumber =data["phoneNumber"]
 
+        cur.execute("SELECT * FROM user_info WHERE username = %s OR phone_number = %s", (username, phonenumber))
+        if cur.fetchone():
+            return jsonify({"message": "Username or phone number already exists"}), 400
+        
+        query = "INSERT INTO user_info (username, user_password, phone_number) VALUES (%s, %s, %s)"
+        cur.execute(query, (username, password, phonenumber))
+
+        conn.commit()
+        session['username'] = username
+        session['phonenumber'] = phonenumber
+
+        return jsonify({"message": "User registered successfully","username": username , "phonenumber": phonenumber})
+        
 
     
-    query = "INSERT INTO user_info (username, user_password, phone_number) VALUES (%s, %s, %s)"
-    cur.execute(query, (username, password, phonenumber))
-
-    conn.commit()
-
-    return jsonify({"message": "User registered successfully"})
+    
+    except Exception as e:
+        # Handle any unexpected errors
+        return jsonify({"message": "An error occurred"}), 500
 
 
 @app.route("/login", methods=["POST"])
@@ -45,6 +59,10 @@ def login():
 
     cur.execute("SELECT * FROM user_info WHERE phone_number = %s AND user_password = %s", (phonenumber, password))
     user = cur.fetchone()
+    session['phonenumber'] = phonenumber
+    session.permanent = True
+    
+    
     if user and user[2] == password:
         return jsonify({"message": "Login successful"})
     else:
@@ -100,4 +118,15 @@ def get_products3():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0")
+
+
+
+
+
+if session["mohammad"]:
+   pass 
+
+session["mohammad"] = True
+session['username'] = "mohammad"
+session['username'] = "mwhdi"
