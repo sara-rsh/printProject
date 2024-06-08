@@ -1,6 +1,6 @@
 import styles from "./login.module.css";
 import BackDrop from "../BackDrop/backDrop";
-import { useState, useContext } from "react";
+import { useState, useContext , useEffect} from "react";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -45,8 +45,16 @@ function Login({ closeModal, phoneNumber, password }) {
       .catch(error => {
         console.error('Error: ', error);
       });
+      // check
       setIsLogedIn(true);
   };
+
+  useEffect(() => {
+    fetch('http://localhost:5000/login')
+      .then(response => response.json())
+      .then(data =>{console.log(data)} )
+      .catch(error => console.error(error));
+  }, []);
   // const onFormSubmit = (data) => {
   //   fetch('http://localhost:5000/login', {
   //     method: 'POST',

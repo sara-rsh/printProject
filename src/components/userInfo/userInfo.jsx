@@ -5,10 +5,32 @@ function UserInfo() {
   const [isShowen, setIsShown] = useState(true);
 
   const handleUserInfoSubmit = () => {
-    alert("سفارش شما ثبت شداطلاعات مربوطه برایتان ایمیل خواهد شد");
+    fetch('http://localhost:5000/userInfo', {
+      method: 'POST',
+      // body: JSON.stringify(data),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Server response: ', data);
+      })
+      .catch(error => {
+        console.error('Error: ', error);
+      });
+    // alert("سفارش شما ثبت شداطلاعات مربوطه برایتان ایمیل خواهد شد");
   };
   const handleUserReq = () => {
-    alert("درخواست شما ثبت شداطلاعات مربوطه برایتان ایمیل خواهد شد");
+    // alert("درخواست شما ثبت شداطلاعات مربوطه برایتان ایمیل خواهد شد");
+    fetch('http://localhost:5000/request', {
+      method: 'POST',
+      // body: JSON.stringify(data),
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Server response: ', data);
+      })
+      .catch(error => {
+        console.error('Error: ', error);
+      });
   };
 
   return (
