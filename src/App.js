@@ -4,14 +4,12 @@ import Header from "./components/header/header.jsx";
 import Navbar from "./components/navbar/navbar.jsx";
 import HomePage from "./pages/homePage/homePage.jsx";
 import Information from "./pages/information/information.jsx";
-import Request from "./components/request/request.jsx";
 import Products from "./pages/products/products.jsx";
 import Footer from "./components/footer/footer.jsx";
 import { CartProvider } from "./context/cartContext.js";
 import { ProductsProvider } from "./context/apiContext";
 import { ProductsProvider2 } from "./context/apiContext2.js";
 import { FlagProvider } from "./context/flagContext.js";
-// import { PiWhatsappLogoFill } from "react-icons/pi";
 import { IoLogoWhatsapp } from "react-icons/io5";
 
 function App() {
@@ -32,7 +30,6 @@ function App() {
                   <Route path="/" element={<HomePage />} />
                   <Route path="/products" element={<Products />} />
                   <Route path="/information" element={<Information />} />
-                  <Route path="/request" element={<Request />} />
                 </Routes>
                 <Footer />
               </FlagProvider>
@@ -40,7 +37,6 @@ function App() {
           </ProductsProvider2>
         </ProductsProvider>
       </BrowserRouter>
-      {/* <Route path='*' element={<div>NOT FOUND</div>}/> */}
     </div>
   );
 }
