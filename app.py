@@ -65,7 +65,7 @@ def get_products1():
     #         "picture": product[4]
     #     }
     #     product_data.append(product_dict)
-    print(products)
+   
     return jsonify({"products": products})
 
 @app.route("/products2", methods=["GET"])

@@ -10,9 +10,9 @@ export const ProductsProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:3000/products')
+    fetch('http://localhost:5000/products')
       .then(response => response.json())
-      .then(data =>{console.log(data);setProducts(data)} )
+      .then(data =>{setProducts(data.products)} )
       .catch(error => console.error(error));
   }, []);
 

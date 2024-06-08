@@ -4,10 +4,11 @@ import { CartContext } from "../../context/cartContext";
 // import { useProducts } from "../../context/apiContext.js";
 import { FaRegHeart } from "react-icons/fa6";
 // import Ax from '../../assets/3-5.jpg'
+import AA from '../../static/1-1.jpg'
 
 function ProductItem({products}) {
   const cart = useContext(CartContext);
-  console.log(products)
+  // console.log(products)
   // const products = useProducts();
 
   return (

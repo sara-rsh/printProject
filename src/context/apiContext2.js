@@ -9,37 +9,16 @@ export const useProducts2 = () => {
 export const ProductsProvider2 = ({ children }) => {
   const [products2, setProducts2] = useState([]);
 
-  // useEffect(() => {
-
-    // const fetchData = async () => {
-    //   const result = await fetch("http://localhost:5000/products");
-    //   const jsonResult = await result.json();
-    //   console.log(jsonResult)
-    //   setProducts2(jsonResult);
-    // };
-    // fetchData();
-  //   const fetchData = async () => {
-  //     try {
-  //       const result = await fetch("http://localhost:3000/products2");
-  //       if (!result.ok) {
-  //         throw new Error('Failed to fetch data');
-  //       }
-  //       const jsonResult = await result.json();
-  //       setProducts2(jsonResult);
-  //     } catch (error) {
-  //       console.error('Error fetching data:', error);
-  //     }
-  //   };
-  //   fetchData()
-
-  // }, []);
-
   useEffect(() => {
-    fetch('http://localhost:3000/products')
+    fetch('http://localhost:5000/products2')
       .then(response => response.json())
-      .then(data =>{console.log(data);setProducts2(data)} )
+      .then(data =>{
+        setProducts2(data.products)        
+      } )
       .catch(error => console.error(error));
   }, []);
+  // console.log(products2)
+  
 
   return (
     <ProductsContext2.Provider value={products2}>

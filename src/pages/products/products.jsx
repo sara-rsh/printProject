@@ -16,11 +16,13 @@ function Products() {
   const products = useProducts();
   const products2 = useProducts2();
 
+  console.log(products)
+
   const [currentPage, setCurrentPage] = useState(1);
   const [currentPage2, setCurrentPage2] = useState(1);
 
-  const postsPerPage = 6;
-  const postsPerPage2 = 6;
+  const postsPerPage = 9;
+  const postsPerPage2 = 9;
 
   const lastPostIndex = currentPage + postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
