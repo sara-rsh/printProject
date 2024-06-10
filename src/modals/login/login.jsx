@@ -13,6 +13,7 @@ import Logo from "../../assets/logoo.jpeg";
 function Login({ closeModal, phoneNumber, password }) {
   const [isFirstModalOpen, setIsFirstModalOpen] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
+const [userInfo , setUserInfo] = useState([])
 
   const { isLogedIn, setIsLogedIn } = useContext(FlagContext);
 
@@ -52,9 +53,13 @@ function Login({ closeModal, phoneNumber, password }) {
   useEffect(() => {
     fetch('http://localhost:5000/login')
       .then(response => response.json())
-      .then(data =>{console.log(data)} )
+      .then(data =>{setIsLogedIn(data.message); console.log(data.message)})
       .catch(error => console.error(error));
+
+
   }, []);
+
+  // console.log()
   // const onFormSubmit = (data) => {
   //   fetch('http://localhost:5000/login', {
   //     method: 'POST',
@@ -93,6 +98,10 @@ function Login({ closeModal, phoneNumber, password }) {
               {isFirstModalOpen ? (
                 <SignUp />
               ) : (
+                // {userInfo.map((info) =>(
+      
+                // ))
+                // }
                 <form
                   noValidate
                   onSubmit={handleSubmit(onFormSubmit)}

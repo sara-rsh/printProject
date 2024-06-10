@@ -2,6 +2,9 @@ from flask import Flask, request, jsonify, session
 from flask_cors import CORS
 import psycopg2
 import json
+from datetime import datetime
+
+
 
 app = Flask(__name__)
 CORS(app)
@@ -17,40 +20,55 @@ conn = psycopg2.connect(
 
 cur = conn.cursor()
 
-@app.route("/signUp", methods=["POST"])
+
+
+@app.route("/", methods=["POST","GET"])
+def Home():
+    
+    if session.get('username') is not None:
+        username = session.get('username')
+        
+        cur.execute("SELECT phone_number FROM user_info WHERE username = %s", (username))
+        phonenumber=cur.fetchone()
+        
+        user_info = [username, phonenumber]
+
+        return jsonify({"message": "True","userinfo": user_info})
+    else :   
+        return jsonify({"message" : "Not lgoin"}), 401
+
+@app.route("/signUp", methods=["POST","GET"])
 def signUp_user():
     
     # import pdb; pdb.set_trace()
-    try:
-        data = json.loads(request.data)
-        username = data["username"]
-        password = data["password"]
-        phonenumber =data["phoneNumber"]
-
-        cur.execute("SELECT * FROM user_info WHERE username = %s OR phone_number = %s", (username, phonenumber))
-        if cur.fetchone():
-            return jsonify({"message": "Username or phone number already exists"}), 400
-        
-        query = "INSERT INTO user_info (username, user_password, phone_number) VALUES (%s, %s, %s)"
-        cur.execute(query, (username, password, phonenumber))
-
-        conn.commit()
-        session['username'] = username
-        session['phonenumber'] = phonenumber
-
-        return jsonify({"message": "User registered successfully","username": username , "phonenumber": phonenumber})
-        
-
+    data = json.loads(request.data)
+    username = data["username"]
+    password = data["password"]
+    phonenumber =data["phoneNumber"]
     
     
-    except Exception as e:
-        # Handle any unexpected errors
-        return jsonify({"message": "An error occurred"}), 500
+    cur.execute("SELECT * FROM user_info WHERE username = %s OR phone_number = %s" ,(username,phonenumber))
+    if cur.fetchone():
+        return jsonify({"message": "Username or phonenumber already exist"}), 400
+
+    
+    query = "INSERT INTO user_info (username, user_password, phone_number) VALUES (%s, %s, %s)"
+    cur.execute(query, (username, password, phonenumber))
+
+    conn.commit()
+    user_info = [username, phonenumber]
+   
+    
+
+    return jsonify({"message": "True" }), 200
 
 
-@app.route("/login", methods=["POST"])
+
+
+@app.route("/login", methods=["POST","GET"])
 def login():
     
+    # import pdb; pdb.set_trace()
     data = json.loads(request.data)
     phonenumber =data["phoneNumber"]
     password =data["password"]
@@ -59,18 +77,124 @@ def login():
 
     cur.execute("SELECT * FROM user_info WHERE phone_number = %s AND user_password = %s", (phonenumber, password))
     user = cur.fetchone()
-    session['phonenumber'] = phonenumber
-    session.permanent = True
+      
     
+    if user is not None and user[2] == password:
+        session['username'] = user[1]
+        session.permanent = True
+        return jsonify({"message": "True"}), 200
     
-    if user and user[2] == password:
-        return jsonify({"message": "Login successful"})
     else:
         return jsonify({"message": "Invalid phonenumber or password"}), 401
 
 
+@app.route("/orders", methods=['POST'])
+def save_orders():
+    
+    try:
+        data = request.get_json()
+
+        numberofproduct = data['numberofproduct']
+        price = data['price']
+        total_amount = data['total_amount']
+        
+        username = session.get('username')
+
+
+        cur.execute("SELECT id FROM user_info WHERE username = %s", (username))
+        userid = cur.fetchone()
+        if userid is None:
+                return jsonify({'message': 'User not found'}), 404
+
+        
+        query = "INSERT INTO orders (numberofproduct, price , total_amount , userid) VALUES (%s, %s, %s, %s)"
+        cur.execute(query, (numberofproduct, price, total_amount, userid))
+
+        
+        return jsonify({'message': 'Data saved successfully'}), 200
+    except Exception as e:
+        return jsonify({'message': 'Error In saving data: ' + str(e)}), 500
+    
+
+@app.route("/getorders", methods=['GET'])
+def get_orders():
+    
+    username = session.get('username')
+    
+    cur.execute("SELECT id FROM user_info WHERE username = %s",(username))
+    user = cur.fetchone()
+    
+    userid = user[0]
+    
+    cur.execute("SELECT * FROM orders WHERE userid = %s",(userid))
+    orders =cur.fetchall()
+    return jsonify({"orders": orders})
+
+
+@app.route("/userextrainfo", methods=['POST'])
+def userextrainfo():
+    
+    try:
+        data = request.get_json()
+
+        province = data['province']
+        city = data['city']
+        address = data['address']
+        code_posty = data['code_posty']
+        
+        username = session.get('username')
+
+        cur.execute("SELECT id FROM user_info WHERE username = %s", (username))
+        userid = cur.fetchone()
+        
+        if userid is None:
+                    return jsonify({'message': 'User not found'}), 404
+        
+        query = "INSERT INTO user_extrainfo (province, city , address, code_posty , userid) VALUES (%s, %s, %s, %s, %s)"
+        cur.execute(query, (province, city , address, code_posty , userid))
+        
+        return jsonify({'message': 'Data saved successfully'}), 200
+    except Exception as e:
+        return jsonify({'message': 'Error In saving data: ' + str(e)}), 500
+
+
+@app.route("/request", methods=['POST'])
+def requests():
+    
+    try:
+        data = request.get_json()
+
+        textinfo = data['textinfo']
+        
+        t = datetime.now()
+        req_date = '{}/{}/{}'.format(t.year, t.month, t.day)
+        req_time = '{}:{}:{}'.format(t.hour, t.minute, t.second)
+        request_date = req_date + '  ' +  req_time
+        
+        
+        username = session.get('username')
+
+
+        cur.execute("SELECT id FROM user_info WHERE username = %s", (username))
+        userid = cur.fetchone()
+        if userid is None:
+                return jsonify({'message': 'User not found'}), 404
+
+        
+        query = "INSERT INTO request (text_info, request_date , userid) VALUES (%s, %s, %s, %s)"
+        cur.execute(query, (textinfo, request_date , userid))
+
+        
+        return jsonify({'message': 'Data saved successfully'}), 200
+    except Exception as e:
+        return jsonify({'message': 'Error In saving data: ' + str(e)}), 500
+    
+
+    
+
 @app.route("/products", methods=["GET"])
 def get_products1():
+    
     
     cur.execute("SELECT * FROM products WHERE product_category = 'HP_MODEL'")
     products = cur.fetchall()
@@ -118,15 +242,7 @@ def get_products3():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0")
+    app.run(debug=True)
 
 
 
-
-
-if session["mohammad"]:
-   pass 
-
-session["mohammad"] = True
-session['username'] = "mohammad"
-session['username'] = "mwhdi"
