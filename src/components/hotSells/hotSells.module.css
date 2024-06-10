@@ -26,20 +26,30 @@
   margin: 0.5vw;
   position: relative;
 }
-.hotPart div h3:hover{
-  background: linear-gradient(180deg,rgba);
-
+.hotPart div:hover::after {
+  display: none;
 }
-.hotPart div::after{
-  content:"";
+.hotPart div:hover :nth-child(2) {
+  display: none;
+}
+.shadow::after {
+  content: "";
   position: absolute;
   width: 100%;
   height: 100%;
-  top: .5vw;
+  top: 0vw;
   left: 0vw;
-  z-index:0;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.251) 65.07%, rgba(0, 0, 0, 0.842) 84.63%, rgba(0, 0, 0, 0.8) 100%);
+  z-index: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.185) 65.07%,
+    rgba(0, 0, 0, 0.842) 84.63%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
   border-radius: 1vw;
+}
+.hideShadow {
+  background: transparent;
 }
 .hotPart div:nth-child(1) {
   grid-area: p1;
@@ -58,10 +68,10 @@
 }
 .hotPart div h3 {
   position: absolute;
-  bottom: 0.5vw;
-  left: 0.5vw;
+  bottom: 1vw;
+  left: 1vw;
   color: #ffff;
   z-index: 1;
-  font-size: 1.3vw;
+  font-size: .9vw;
   margin: 0px;
 }
