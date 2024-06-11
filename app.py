@@ -3,6 +3,9 @@ from flask_cors import CORS
 import psycopg2
 import json
 from datetime import datetime
+from flask_bcrypt import Bcrypt
+
+bcrypt = Bcrypt()
 
 
 
@@ -33,59 +36,62 @@ def Home():
         
         user_info = [username, phonenumber]
 
-        return jsonify({"message": True ,"userinfo": user_info})
+        return jsonify({"message": True,"userinfo": user_info})
     else :   
-        return jsonify({"message" : False }), 401
+        return jsonify({"message" : False}), 401
 
-@app.route("/signUp", methods=["POST","GET"])
-def signUp_user():
-    
-    # import pdb; pdb.set_trace()
-    data = json.loads(request.data)
-    username = data["username"]
-    password = data["password"]
-    phonenumber =data["phoneNumber"]
-    
-    
-    cur.execute("SELECT * FROM user_info WHERE username = %s OR phone_number = %s" ,(username,phonenumber))
-    if cur.fetchone():
-        return jsonify({"message": False }), 400
+@app.route("/signUp", methods=["POST"])
+def sign_up_user():
+    try:
+        data = json.loads(request.data)
+        username = data["username"]
+        password = data["password"]
+        phone_number = data["phone_number"]
 
-    
-    query = "INSERT INTO user_info (username, user_password, phone_number) VALUES (%s, %s, %s)"
-    cur.execute(query, (username, password, phonenumber))
+        
+        cur.execute("SELECT * FROM user_info WHERE username = %s OR phone_number = %s", (username, phone_number))
+        if cur.fetchone():
+            return jsonify({"message": False}), 400
 
-    conn.commit()
-    user_info = [username, phonenumber]
-   
-    
+        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+        query = "INSERT INTO user_info (username, user_password, phone_number) VALUES (%s, %s, %s)"
+        cur.execute(query, (username, hashed_password, phone_number))
+        conn.commit()
 
-    return jsonify({"message": True }), 200
+        return jsonify({"message": True}), 200
+
+    except Exception as e:
+        print(str(e))
+        return jsonify({"message": False}), 500
 
 
 
 
 @app.route("/login", methods=["POST","GET"])
 def login():
-    
-    # import pdb; pdb.set_trace()
-    data = json.loads(request.data)
-    phonenumber =data["phoneNumber"]
-    password =data["password"]
+    try:
+        data = json.loads(request.data)
+        phonenumber = data["phoneNumber"]
+        password = data["password"]
 
-    cur = conn.cursor()
 
-    cur.execute("SELECT * FROM user_info WHERE phone_number = %s AND user_password = %s", (phonenumber, password))
-    user = cur.fetchone()
-      
-    
-    if user is not None and user[2] == password:
-        session['username'] = user[1]
-        session.permanent = True
-        return jsonify({"message": True }), 200
-    
-    else:
-        return jsonify({"message": False }), 401
+
+        cur.execute("SELECT * FROM user_info WHERE phone_number = %s", (phonenumber,))
+        user = cur.fetchone()
+        
+        if user is not None:
+            if bcrypt.check_password_hash(user[2], password):
+                session['username'] = user[1]
+                session.permanent = True
+                return jsonify({"message": True}), 200
+            else:
+                return jsonify({"message": False}), 401
+        else:
+            return jsonify({"message": False}), 401
+
+    except Exception as e:
+        print(str(e))
+        return jsonify({"message": False}), 500
 
 
 @app.route("/orders", methods=['POST'])
@@ -104,7 +110,7 @@ def save_orders():
         cur.execute("SELECT id FROM user_info WHERE username = %s", (username))
         userid = cur.fetchone()
         if userid is None:
-                return jsonify({'message': 'User not found'}), 404
+                return jsonify({'message': False}), 404
 
         
         query = "INSERT INTO orders (numberofproduct, price , total_amount , userid) VALUES (%s, %s, %s, %s)"
@@ -148,12 +154,12 @@ def userextrainfo():
         userid = cur.fetchone()
         
         if userid is None:
-                    return jsonify({'message': 'User not found'}), 404
+                    return jsonify({'message': False}), 404
         
         query = "INSERT INTO user_extrainfo (province, city , address, code_posty , userid) VALUES (%s, %s, %s, %s, %s)"
         cur.execute(query, (province, city , address, code_posty , userid))
         
-        return jsonify({'message': True ,}), 200
+        return jsonify({'message': True}), 200
     except Exception as e:
         return jsonify({'message': False + str(e)}), 500
 
@@ -178,7 +184,7 @@ def requests():
         cur.execute("SELECT id FROM user_info WHERE username = %s", (username))
         userid = cur.fetchone()
         if userid is None:
-                return jsonify({'message': 'User not found'}), 404
+                return jsonify({'message': False}), 404
 
         
         query = "INSERT INTO request (text_info, request_date , userid) VALUES (%s, %s, %s, %s)"
