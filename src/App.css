@@ -1,6 +1,8 @@
 body{
     direction: rtl;
     margin: 0px;
+    background-color: rgb(245, 245, 245);
+    /* color:#F7F7F7 ; */
 }
 .stickyBtn {
     position: fixed;

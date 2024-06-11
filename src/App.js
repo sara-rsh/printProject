@@ -23,7 +23,7 @@ function App() {
                 <Link to="/" className="stickyBtn">
                   <IoLogoWhatsapp />
                 </Link>
-                <div className="discount">با عضویت در کاراگراف، اولین سفارش خود را ” رایگان” تحویل بگیرید. </div>
+                <div className="discount">با عضویت در piurim اولین سفارش خود را ” رایگان” تحویل بگیرید. </div>
                 <Header/>
                 <Navbar/>
                 <Routes >

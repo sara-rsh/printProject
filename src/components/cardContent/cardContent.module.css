@@ -2,11 +2,12 @@
   display: flex;
   gap: 5vw;
   justify-content: center;
-  background-color: #eeedf4;
+  background-color: #ffff;
   padding: 1.5vw 0px;
   border-radius: 5px;
   margin: 2vw 13vw;
   border-radius: 0px 4vw;
+  border: 1px solid #d6d6d6;
 }
 .container div {
   display: flex;
