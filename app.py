@@ -33,9 +33,9 @@ def Home():
         
         user_info = [username, phonenumber]
 
-        return jsonify({"message": "True","userinfo": user_info})
+        return jsonify({"message": True ,"userinfo": user_info})
     else :   
-        return jsonify({"message" : "Not lgoin"}), 401
+        return jsonify({"message" : False }), 401
 
 @app.route("/signUp", methods=["POST","GET"])
 def signUp_user():
@@ -49,7 +49,7 @@ def signUp_user():
     
     cur.execute("SELECT * FROM user_info WHERE username = %s OR phone_number = %s" ,(username,phonenumber))
     if cur.fetchone():
-        return jsonify({"message": "Username or phonenumber already exist"}), 400
+        return jsonify({"message": False }), 400
 
     
     query = "INSERT INTO user_info (username, user_password, phone_number) VALUES (%s, %s, %s)"
@@ -60,7 +60,7 @@ def signUp_user():
    
     
 
-    return jsonify({"message": "True" }), 200
+    return jsonify({"message": True }), 200
 
 
 
@@ -82,10 +82,10 @@ def login():
     if user is not None and user[2] == password:
         session['username'] = user[1]
         session.permanent = True
-        return jsonify({"message": "True"}), 200
+        return jsonify({"message": True }), 200
     
     else:
-        return jsonify({"message": "Invalid phonenumber or password"}), 401
+        return jsonify({"message": False }), 401
 
 
 @app.route("/orders", methods=['POST'])
@@ -111,9 +111,9 @@ def save_orders():
         cur.execute(query, (numberofproduct, price, total_amount, userid))
 
         
-        return jsonify({'message': 'Data saved successfully'}), 200
+        return jsonify({'message': True}), 200
     except Exception as e:
-        return jsonify({'message': 'Error In saving data: ' + str(e)}), 500
+        return jsonify({'message': False + str(e)}), 500
     
 
 @app.route("/getorders", methods=['GET'])
@@ -153,9 +153,9 @@ def userextrainfo():
         query = "INSERT INTO user_extrainfo (province, city , address, code_posty , userid) VALUES (%s, %s, %s, %s, %s)"
         cur.execute(query, (province, city , address, code_posty , userid))
         
-        return jsonify({'message': 'Data saved successfully'}), 200
+        return jsonify({'message': True ,}), 200
     except Exception as e:
-        return jsonify({'message': 'Error In saving data: ' + str(e)}), 500
+        return jsonify({'message': False + str(e)}), 500
 
 
 @app.route("/request", methods=['POST'])
@@ -185,9 +185,9 @@ def requests():
         cur.execute(query, (textinfo, request_date , userid))
 
         
-        return jsonify({'message': 'Data saved successfully'}), 200
+        return jsonify({'message': True}), 200
     except Exception as e:
-        return jsonify({'message': 'Error In saving data: ' + str(e)}), 500
+        return jsonify({'message': False + str(e)}), 500
     
 
     
