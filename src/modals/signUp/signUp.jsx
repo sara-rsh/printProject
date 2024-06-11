@@ -2,7 +2,7 @@
 import styles from "../login/login.module.css";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
-import { useState, useContext } from "react";
+import { useState, useContext , useEffect} from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { LuEye, LuEyeOff } from "react-icons/lu";
 import { FlagContext } from "../../context/flagContext.js";
@@ -40,7 +40,6 @@ function SignUp() {
   const onFormSubmit = (data) => {
     fetch("http://localhost:5000/signUp", {
       method: "POST",
-      body: JSON.stringify(data),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -49,8 +48,16 @@ function SignUp() {
       .catch((error) => {
         console.error("Error: ", error);
       });
-    setIsLogedIn(true);
   };
+
+  useEffect(() => {
+    fetch("http://localhost:5000/")
+      .then((response) => response.json())
+      .then((data) => {
+        setIsLogedIn(data.message);
+      })
+      .catch((error) => console.error(error));
+  },[]);
 
   const [isHidden, setIsHidden] = useState(false);
 

@@ -1,81 +1,61 @@
 import styles from "./login.module.css";
 import BackDrop from "../BackDrop/backDrop";
-import { useState, useContext , useEffect} from "react";
-import * as yup from "yup";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { useState, useContext, useEffect } from "react";
+// import * as yup from "yup";
+// import { useForm } from "react-hook-form";
+// import { yupResolver } from "@hookform/resolvers/yup";
 import { LuEye, LuEyeOff } from "react-icons/lu";
 import SignUp from "../signUp/signUp";
 import { FlagContext } from "../../context/flagContext.js";
 import image from "../../assets/Frame 11.jpg";
 import Logo from "../../assets/logoo.jpeg";
 
-function Login({ closeModal, phoneNumber, password }) {
+function Login({ closeModal }) {
   const [isFirstModalOpen, setIsFirstModalOpen] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
-const [userInfo , setUserInfo] = useState([])
+  const [userError, setUserError] = useState();
 
   const { isLogedIn, setIsLogedIn } = useContext(FlagContext);
 
-  const schema = yup.object().shape({
-    phoneNumber: yup
-      .string()
-      .matches(phoneNumber, "کاربری با این شماره همراه ثبت نام نشده است")
-      .required("پر کردن فیلد اجباری است"),
-    password: yup
-      .string()
-      .matches(password)
-      .required("پر کردن فیلد اجباری است"),
-  });
+  // const schema = yup.object().shape({
+  //   phoneNumber: yup
+  //     .string()
+  //     .matches(userInfo[0], "کاربری با این شماره همراه ثبت نام نشده است")
+  //     .required("پر کردن فیلد اجباری است"),
+  //   password: yup
+  //     .string()
+  //     .matches(userInfo[1])
+  //     .required("پر کردن فیلد اجباری است"),
+  // });
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   formState: { errors },
+  // } = useForm({ resolver: yupResolver(schema) });
 
   const onFormSubmit = (data) => {
-    fetch('http://localhost:5000/login', {
-      method: 'POST',
-      body: JSON.stringify(data),
+    fetch("http://localhost:5000/login", {
+      method: "POST",
     })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Server response: ', data);
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Server response: ", data);
       })
-      .catch(error => {
-        console.error('Error: ', error);
+      .catch((error) => {
+        console.error("Error: ", error);
       });
-      // check
-      setIsLogedIn(true);
   };
 
   useEffect(() => {
-    fetch('http://localhost:5000/login')
-      .then(response => response.json())
-      .then(data =>{setIsLogedIn(data.message); console.log(data.message)})
-      .catch(error => console.error(error));
-
-
-  }, []);
-
-  // console.log()
-  // const onFormSubmit = (data) => {
-  //   fetch('http://localhost:5000/login', {
-  //     method: 'POST',
-  //     body: JSON.stringify(data),
-  //   })
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       const loggedInStatus = data.isLoggedIn; // فرضا اطلاعات مورد نیاز از سمت سرور
-  //       console.log('Server response: ', data);
-  //       setIsLogedIn(loggedInStatus);
-  //     })
-  //     .catch(error => {
-  //       console.error('Error: ', error);
-  //     });
-  // };
-  
+    fetch("http://localhost:5000/")
+      .then((response) => response.json())
+      .then((data) => {
+        setIsLogedIn(data.message);
+        setUserError(data.message);
+      })
+      .catch((error) => console.error(error));
+  },[]);
 
   return (
     <>
@@ -98,35 +78,37 @@ const [userInfo , setUserInfo] = useState([])
               {isFirstModalOpen ? (
                 <SignUp />
               ) : (
-                // {userInfo.map((info) =>(
-      
-                // ))
-                // }
                 <form
                   noValidate
-                  onSubmit={handleSubmit(onFormSubmit)}
+                  // onSubmit={handleSubmit(onFormSubmit)}
+                  onSubmit={onFormSubmit}
                   className={styles.fieldsContainer}
                 >
                   <h1>ورود به حساب کاربری</h1>
+                  {!userError && (
+                    <p className={styles.validationP}>
+                      کاربری با این اطلاعات در سیستم وجود ندارد
+                    </p>
+                  )}
                   <div className={styles.fields}>
                     <div className={styles.topFields}>
                       <div>
                         <input
                           type="text"
-                          {...register("phoneNumber")}
+                          // {...register("phoneNumber")}
                           placeholder="شماره همراه"
                         />
-                        {errors.phoneNumber && (
+                        {/* {errors.phoneNumber && (
                           <p className={styles.validationP}>
                             {errors.phoneNumber.message}
                           </p>
-                        )}
+                        )} */}
                       </div>
                       <div className={styles.password}>
                         <input
                           type={!isHidden ? "password" : "text"}
                           placeholder="گذرواژه"
-                          {...register("password")}
+                          // {...register("password")}
                         />
                         <button
                           className={styles.hiddenBtn}
@@ -134,11 +116,11 @@ const [userInfo , setUserInfo] = useState([])
                         >
                           {isHidden ? <LuEye /> : <LuEyeOff />}
                         </button>
-                        {errors.password && (
+                        {/* {errors.password && (
                           <p className={styles.validationP}>
                             {errors.password.message}
                           </p>
-                        )}
+                        )} */}
                       </div>
                       <a href="/">گذرواژه خود را فراموش کرده ام</a>
                     </div>

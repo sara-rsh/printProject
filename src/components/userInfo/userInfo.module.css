@@ -45,3 +45,9 @@
   left: 1vw;
   position: absolute;
 }
+.errorP{
+  color: brown;
+}
+.accessP{
+  color: #028a34;
+}

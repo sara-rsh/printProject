@@ -1,7 +1,7 @@
 import styles from "./basket.module.css";
 import BackDrop from "../BackDrop/backDrop";
 import { useProducts } from "../../context/apiContext";
-import { useContext, useState } from "react";
+import { useContext, useState , useEffect} from "react";
 import { CartContext } from "../../context/cartContext.js";
 import { FlagContext } from "../../context/flagContext.js";
 import CartProduct from "../../components/cartProduct/cartProduct.jsx";
@@ -18,6 +18,7 @@ function Basket({ closeModal, productCount }) {
   setIsLogedIn(isLogedIn && true);
 
   const [isShown, setIsShown] = useState(true);
+  const [orderError , setOrderError] = useState();
 
   let totalPrice = 0;
   cart.items.forEach((item) => {
@@ -27,15 +28,36 @@ function Basket({ closeModal, productCount }) {
     }
   });
 
-  const onFormSubmit = (data) => {
-    console.log(data);
-  };
-
   const handleBasketModal = () => {
     if (isLogedIn) {
       setIsShown(false);
     } else setIsShown(true);
   };
+
+  const onFormSubmit = () => {
+    const data = { totalPrice: totalPrice };
+    fetch("http://localhost:5000/getorders", {
+      method: "POST",
+      body: JSON.stringify(data)
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        console.log("Server response: ", data);
+      })
+      .catch((error) => {
+        console.error("Error: ", error);
+      });
+  };
+
+  useEffect(() => {
+    fetch("http://localhost:5000/orders")
+      .then((response) => response.json())
+      .then((data) => {
+        setOrderError(data.message);
+      })
+      .catch((error) => console.error(error));
+  },[]);
 
   return (
     <div>
@@ -79,7 +101,7 @@ function Basket({ closeModal, productCount }) {
                       </p>
                       <div className={styles.discount}>
                         <input type="text" />
-                        <button>ثبت</button>
+                        <button type="submit">ثبت</button>
                       </div>
                     </div>
                   </div>
@@ -105,13 +127,14 @@ function Basket({ closeModal, productCount }) {
                       <p>{totalPrice}تومان</p>
                     </div>
                     <button
+                    type="submit"
                       onClick={() =>
                         !isLogedIn
                           ? alert("شما ابتدا باید وارد سایت شوید")
                           : handleBasketModal()
                       }
                     >
-                      <Link to="/information">تکمیل سفارش</Link>
+                      {orderError && <Link to="/information">تکمیل سفارش</Link>}
                     </button>
                   </div>
                 </form>
